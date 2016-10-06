@@ -107,6 +107,9 @@ case 1:
 eval "return 'albert'" 1 "name" 0
 case 2:
 eval "dofile('/home/opengl/world/redis/test.lua')" 1 "name" 0
+http://redis.io/commands/eval
+// execute 'set foo bar' and return the cmd return value
+eval "return redis.call('set' 'foo', 'bar')" 0
 
 LUA C API to extend redis
 
