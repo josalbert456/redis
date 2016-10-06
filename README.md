@@ -1,3 +1,3 @@
 # redis
 
-with a little, read a little book about redis and make some notes
+with a little cold, read a little book about redis and make some notes
