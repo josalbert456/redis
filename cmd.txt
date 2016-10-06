@@ -1,0 +1,139 @@
+set key value
+get key value
+del key
+
+hset hash_table key value
+hget hash_table key
+hdel hash_table key
+del hash_table
+
+sadd set_name element
+smembers set_name
+sinter set1 set2
+sunion set1 set2
+del set_name
+
+// set expiration time for a key
+expire key seconds
+// check the expired time
+ttl key
+// remove expired time for a key
+persist key
+
+case 1:
+hset "user_albert" "password" "123456"
+hset "user_albert" "logtime" "16-10-07"
+sadd "users" "user_albert"
+// after that, maybe a expire can be set
+// such as, expire "user_albert" 100
+hset "user_johnson" "password" "234567"
+hset "user_johnson" "logtime" "16-10-08"
+sadd "users" "user_johnson"
+
+Publish, Subscribe, Punsubscribe
+On the server side, Node, Socket.IO for network layer, 
+Redis for pub/sub/ that delives msg between clients
+On the client side, jquery to process msg and send data to server
+
+MULTI/EXEC
+multi
+hset "user_albert" "password" "123456"
+hset "user_albert" "logtime" "16-10-09"
+hset "user_albert" "ip" "0.0.0.0"
+exec
+Note:
+	All commands written in a MULTI/EXEC block are assured to be run
+	sequentially, which means that no other Redis client gets served 
+	during the length of the block. DISCARD will exit the block
+
+incr key
+incrby key value
+decr key
+decrby key value
+set "johnson_log_time" 0
+incr "johnson_log_time" 
+incrby "johnson_log_time" 10	
+
+hmset hash_table key1 value1 key2 value2 ...
+hmget hash_table key1 key2 key3...
+hincrby hash_table key incr_value
+
+// add to end
+rpush list_name value
+// add to head
+lpush list_name value
+// get from start to end
+lrange list_name start end
+// keep only elems from start to end
+ltrim list_name start end
+// list length
+llen
+// remove count occurences of value, count > 0,
+// from head, count < 0, from end, end =0 all
+lrem list_name count value
+// remove from head
+lpop list_name
+// remove from end
+lpop list_name
+// blpop list1 [list2 list3 ...] timeout_value
+// brpop list1 [list2 list3 ...] timeout_value
+
+// save info to file
+save
+// save info to file at background
+bgsave
+// rewrites the AOF to match the current database
+// if your data changes very often, the on-disk file
+// will grow very fast, so you should compact it by issuing
+// bgrewriteaof regularly
+bgrewrite
+
+slaveof master-ip-or-hostname [masterport]
+config set masterauth password
+
+Problems:
+sort (cmd)
+case 1:
+set "ella_weight" 99
+set "ella_weight" 101
+set "ella_weight" 98
+set "ella_weight" 102
+set "ella_weight" 103
+set "ella_weight" 96
+sort "ella_weight"
+
+eval
+case 1:
+eval "return 'albert'" 1 "name" 0
+case 2:
+eval "dofile('/home/opengl/world/redis/test.lua')" 1 "name" 0
+
+LUA C API to extend redis
+
+
+
+/etc/redis/redis.conf
+appendfsync always/everysec/no
+
+slaveof master-ip-or-hostname masterport
+masterauth master-password
+
+vm-enabled yes
+vm-swap-file
+vm-max-memory
+vm-pages 
+vm-page-size
+vm-max-threads
+
+
+
+/etc/redis/redis.conf
+/var/lib/redis/dump.rdb
+
+
+Note:
+be sure to remember to run BGREWRITEAOF regularly if you're using AOF
+
+redis.io
+freenode: #redis
+stackoverflow
